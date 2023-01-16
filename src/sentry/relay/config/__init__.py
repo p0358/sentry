@@ -494,6 +494,7 @@ TRANSACTION_METRICS = frozenset(
     [
         "s:transactions/user@none",
         "d:transactions/duration@millisecond",
+        "c:transactions/count_per_root_project@none",
     ]
 )
 

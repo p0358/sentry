@@ -27,19 +27,25 @@ def generate_modules(data):
                 frame["module"] = generate_module(abs_path)
 
 
+# TODO: We still need `preprocess_event` tasks and the remaining, non-symbolication specific
+# code from `lang/javascript/processor.py` to run somewhere. Unless we want whole `processor.py`
+# to be moved to Rust side, including module generation, rewriting and translations.
 class JavascriptPlugin(Plugin2):
-    can_disable = False
+    def get_event_enhancers(self, data):
+        return [lambda x: x]
 
-    def can_configure_for_project(self, project, **kwargs):
-        return False
+    # can_disable = False
 
-    def get_event_preprocessors(self, data, **kwargs):
-        # XXX: rewrite_exception we probably also want if the event
-        # platform is something else? unsure
-        if data.get("platform") in ("javascript", "node"):
-            return [preprocess_event]
-        return []
+    # def can_configure_for_project(self, project, **kwargs):
+    #     return False
 
-    def get_stacktrace_processors(self, data, stacktrace_infos, platforms, **kwargs):
-        if "javascript" in platforms or "node" in platforms:
-            return [JavaScriptStacktraceProcessor]
+    # def get_event_preprocessors(self, data, **kwargs):
+    #     # XXX: rewrite_exception we probably also want if the event
+    #     # platform is something else? unsure
+    #     if data.get("platform") in ("javascript", "node"):
+    #         return [preprocess_event]
+    #     return []
+
+    # def get_stacktrace_processors(self, data, stacktrace_infos, platforms, **kwargs):
+    #     if "javascript" in platforms or "node" in platforms:
+    #         return [JavaScriptStacktraceProcessor]

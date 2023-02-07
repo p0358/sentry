@@ -246,6 +246,10 @@ def is_integration_provider(provider):
 
 
 def get_emails_for_user_or_org(user, orgId):
+    from django.db.models import Q
+
+    from sentry.models import OrganizationMemberTeam, Team
+
     emails = []
     if user.is_sentry_app:
         organization = Organization.objects.get(id=orgId)

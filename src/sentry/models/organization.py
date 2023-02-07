@@ -7,7 +7,7 @@ from typing import Collection, FrozenSet, Optional, Sequence
 
 from django.conf import settings
 from django.db import IntegrityError, models, router, transaction
-from django.db.models import QuerySet
+from django.db.models import Q, QuerySet
 from django.db.models.signals import post_delete
 from django.urls import NoReverseMatch, reverse
 from django.utils import timezone
